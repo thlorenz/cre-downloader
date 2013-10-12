@@ -47,8 +47,6 @@ void download_episode(int n) {
 
   long status = download_url(url, name, fp);
   if (status) printf("Download failed with status: %ld\n", status);
-  // can still see this function here although it is static
-  // write_data();
 
   fclose(fp);
 }

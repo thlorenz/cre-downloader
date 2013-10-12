@@ -1,7 +1,7 @@
 CC=cc
 CFLAGS=-c -Wall
 LDFLAGS=-lcurl
-SOURCES=main.c
+SOURCES=main.c lib/download_url.c
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=main
 
