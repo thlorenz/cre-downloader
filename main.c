@@ -45,7 +45,7 @@ void download_episode(int n) {
 
   printf("Downloading: %s\n", url);
 
-  long status = download_url(url, name, fp);
+  long status = download_url(url, fp);
   if (status) printf("Download failed with status: %ld\n", status);
 
   fclose(fp);

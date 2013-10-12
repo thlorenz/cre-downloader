@@ -5,7 +5,7 @@ static size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
   return written;
 }
 
-long download_url(char* url, char* name, FILE* fp) {
+long download_url(char* url, FILE* fp) {
   CURL *session;
   CURLcode curl_code;
   long http_code;
