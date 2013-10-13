@@ -8,6 +8,7 @@ lib-cov
 *.gz
 *.o
 *.mp3
+*.html
 main
 
 pids
