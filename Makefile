@@ -1,7 +1,7 @@
-CC=cc
+CC=gcc
 CFLAGS=-c -Wall
 LDFLAGS=-lcurl
-SOURCES=main.c lib/download_url.c
+SOURCES=main.c $(wildcard lib/*.c)
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=main
 

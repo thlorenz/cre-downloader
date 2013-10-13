@@ -2,11 +2,13 @@
 #include <unistd.h>
 #include <string.h>
 #include "./lib/download_url.h"
+#include "./lib/get_links.h"
 
 #define ROOT_URL "http://meta.metaebene.me/media/cre/"
 #define MAXNAME 10
 #define MAXURL sizeof(ROOT_URL) + MAXNAME
 #define MAX_PATH 1024
+#define MAX_LINKS 1024
 
 void get_url(int n, char* name, char* url) {
 
@@ -52,11 +54,8 @@ void download_episode(int n) {
 }
 
 int main(int argc, const char *argv[]) {
-  /*int i;
-  for (i = 1; i < 10; i++) {
-    download_episode(i);
-  }*/
-
-  download_episode(3);
+  char* links [MAX_LINKS];
+  int num = get_links(links);
+  printf("%d", num);
   return 0;
 }
