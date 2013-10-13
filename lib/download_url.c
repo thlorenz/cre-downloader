@@ -1,12 +1,7 @@
 #include <curl/curl.h>
 #include "download_url.h"
 
-static size_t write_data(void *ptr, size_t size, size_t nmemb, FILE *stream) {
-  size_t written = fwrite(ptr, size, nmemb, stream);
-  return written;
-}
-
-long download_url(char* url, FILE* fp) {
+long download_url(char* url, FILE* fp, size_t(*write_data)(void *ptr, size_t size, size_t nmemb, FILE *stream)) {
   CURL *session;
   CURLcode curl_code;
   long http_code;

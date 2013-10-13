@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include "./lib/download_url.h"
+#include "./lib/download_url_file.h"
 #include "./lib/get_links.h"
 
 #define ROOT_URL "http://meta.metaebene.me/media/cre/"
@@ -47,7 +47,7 @@ void download_episode(int n) {
 
   printf("Downloading: %s\n", url);
 
-  long status = download_url(url, fp);
+  long status = download_url_file(url, fp);
   if (status) printf("Download failed with status: %ld\n", status);
 
   fclose(fp);
