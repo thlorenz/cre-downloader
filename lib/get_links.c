@@ -1,10 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./download_url_buffer.h"
+#include "download_url_buffer.h"
 
 #define ARCHIVE_URL "http://cre.fm/archiv"
 
-int get_links(char* links[]) {
+int
+get_links(char* links[]) {
   DownloadResult res;
 
   res = download_url_buffer(ARCHIVE_URL);

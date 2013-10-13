@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-#include "./lib/download_url_file.h"
-#include "./lib/get_links.h"
+#include "lib/download_url_file.h"
+#include "lib/get_links.h"
 
 #define ROOT_URL "http://meta.metaebene.me/media/cre/"
 #define MAXNAME 10
@@ -10,13 +10,15 @@
 #define MAX_PATH 1024
 #define MAX_LINKS 1024
 
-void get_url(int n, char* name, char* url) {
+void
+get_url(int n, char* name, char* url) {
 
   strcpy(url, ROOT_URL);
   strcat(url, name);
 }
 
-FILE* get_relative_writestream(char* subdir, char* name) {
+FILE*
+get_relative_writestream(char* subdir, char* name) {
   char cwd[MAX_PATH];
   char full_path[MAX_PATH];
 
@@ -27,7 +29,8 @@ FILE* get_relative_writestream(char* subdir, char* name) {
   return fopen(full_path, "wb");
 }
 
-void get_name(int n, char* name) {
+void
+get_name(int n, char* name) {
   char* padding =
       n < 10  ? "00"
     : n < 100 ? "0"
@@ -36,7 +39,8 @@ void get_name(int n, char* name) {
   sprintf(name, "cre%s%d.mp3", padding, n);
 }
 
-void download_episode(int n) {
+void
+download_episode(int n) {
   char name [MAXNAME];
   char url [MAXURL];
   FILE *fp;
@@ -53,8 +57,8 @@ void download_episode(int n) {
   fclose(fp);
 }
 
-#include "./lib/download_url_buffer.h"
-int main(int argc, const char *argv[]) {
+int
+main(int argc, const char *argv[]) {
   char* links [MAX_LINKS];
   int num = get_links(links);
   printf("%d", num);

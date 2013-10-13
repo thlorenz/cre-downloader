@@ -1,7 +1,13 @@
 #include <curl/curl.h>
 #include "download_url.h"
 
-long download_url(char* url, void* ptr, size_t(*write_data)(void *ptr, size_t size, size_t nmemb, void *stream)) {
+long
+download_url (
+    char* url
+  , void* ptr
+  , size_t(*write_data)(void *ptr, size_t size, size_t nmemb, void *stream)
+  ) {
+
   CURL *curl_handle;
   CURLcode curl_code;
   long http_code;

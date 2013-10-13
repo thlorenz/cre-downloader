@@ -10,7 +10,8 @@ typedef struct MemoryStruct {
   size_t size;
 } MemoryStruct;
 
-static size_t write_chunk_to_memory(void *contents, size_t size, size_t nmemb, void *userp) {
+static size_t
+write_chunk_to_memory(void *contents, size_t size, size_t nmemb, void *userp) {
   size_t realsize = size * nmemb;
   MemoryStruct *mem = (MemoryStruct *)userp;
 
@@ -28,7 +29,8 @@ static size_t write_chunk_to_memory(void *contents, size_t size, size_t nmemb, v
   return realsize;
 }
 
-DownloadResult download_url_buffer(char* url) {
+DownloadResult
+download_url_buffer(char* url) {
   MemoryStruct chunk;
   chunk.memory = malloc(1);
   chunk.size = 0;
