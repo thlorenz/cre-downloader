@@ -53,6 +53,7 @@ void download_episode(int n) {
   fclose(fp);
 }
 
+#include "./lib/download_url_buffer.h"
 int main(int argc, const char *argv[]) {
   char* links [MAX_LINKS];
   int num = get_links(links);
