@@ -57,10 +57,14 @@ download_episode(int n) {
   fclose(fp);
 }
 
-int
-main(int argc, const char *argv[]) {
-  char* links [MAX_LINKS];
-  int num = get_links(links);
-  printf("%d", num);
+
+int main(int argc, const char *argv[])
+{
+  char* links[1024];
+  int len = get_links(links);
+
+  for (int i = 0; i < len; i++) {
+    printf("link: %s", links[i]);
+  }
   return 0;
 }

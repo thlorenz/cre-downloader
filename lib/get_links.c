@@ -4,7 +4,7 @@
 
 #include "download_url_buffer.h"
 #include "path_split.h"
-#include "../deps/gumbo-parser/gumbo.h"
+#include "gumbo.h"
 
 #define ARCHIVE_URL "http://cre.fm/archiv"
 #define DOWNLOAD_URL "http://meta.metaebene.me/media/cre/"
