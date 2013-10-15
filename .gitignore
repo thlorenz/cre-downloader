@@ -9,6 +9,7 @@ lib-cov
 *.o
 *.mp3
 *.html
+
 main
 deps
 node_modules
