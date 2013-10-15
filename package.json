@@ -1,0 +1,27 @@
+{
+  "name": "cre-downloader",
+  "version": "0.0.0",
+  "description": "Downloads podcasts from cre-archive.",
+  "main": "main.c",
+  "scripts": {
+    "postinstall": "clib install thlorenz/gumbo-parser.c -o deps/gumbo-parser"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thlorenz/cre-downloader.git"
+  },
+  "keywords": [
+    "podcast",
+    "archive",
+    "cre",
+    "download"
+  ],
+  "author": "Thorsten Lorenz <thlorenz@gmx.de> (http://thlorenz.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thlorenz/cre-downloader/issues"
+  },
+  "dependencies": {
+    "clib": "~0.1.0"
+  }
+}

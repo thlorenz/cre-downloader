@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "download_url_buffer.h"
+#include "../deps/gumbo-parser/gumbo.h"
 
 #define ARCHIVE_URL "http://cre.fm/archiv"
 #define IN 1;
@@ -61,33 +62,29 @@ char* get_sample () {
   "</tbody>";
 }
 
-int
-find_tbody(char* html, int html_len) {
-  return 0;
-}
+static void
+search_for_links(GumboNode* node) {
+  if (node->type != GUMBO_NODE_ELEMENT) {
+    return;
+  }
+  GumboAttribute* href;
+  if (node->v.element.tag == GUMBO_TAG_A &&
+      (href = gumbo_get_attribute(&node->v.element.attributes, "href"))) {
+    printf("%s\n", href->value);
+  }
 
-int
-parse_links(char* html, int html_len, char* links[]) {
-  char* _tbody = strstr(html, "<tbody>");
-  char* tbody_ =  strstr(_tbody, "</tbody>");
-  printf("res: %s\n", tbody_);
-  return 0;
+  GumboVector* children = &node->v.element.children;
+  for (int i = 0; i < children->length; ++i) {
+    search_for_links((GumboNode*)(children->data[i]));
+  }
 }
 
 int
 get_links(char* links[]) {
-  //DownloadResult res;
+  char* contents = get_sample();
 
-  //res = download_url_buffer(ARCHIVE_URL);
-  //if(res.status) return res.status;
-
-  //parse_links(res.html, res.size, links);
-  char* sample = get_sample();
-  parse_links(sample, strlen(sample), links);
-
-  //printf("html: %s\n", res.html);
-
-
-  //if(res.html) free(res.html);
+  GumboOutput* output = gumbo_parse(contents);
+  search_for_links(output->root);
+  gumbo_destroy_output(&kGumboDefaultOptions, output);
   return 0;
 }

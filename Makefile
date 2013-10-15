@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS=-c -Wall
 LDFLAGS=-lcurl
-SOURCES=main.c $(wildcard lib/*.c)
+SOURCES=main.c $(wildcard lib/*.c) $(wildcard deps/**/*.c)
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=main
 
