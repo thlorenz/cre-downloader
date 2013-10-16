@@ -2,54 +2,72 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "get_links.h"
 #include "download_url_buffer.h"
 #include "path_split.h"
-#include "gumbo.h"
-
-#define ARCHIVE_URL "http://cre.fm/archiv"
-#define DOWNLOAD_URL "http://meta.metaebene.me/media/cre/"
-#define MAXPARTS 1024
+#include "../deps/gumbo-parser/gumbo.h"
 
 static void
-to_archive_url(const char* url, char* archive_url) {
+to_download_url(const char* archive_url, char* download_url) {
   const char* parts[MAXPARTS];
-  char* path = strdup(url);
-  int len = path_split(path, "/", parts);
-
-  // last part is the name we want -- TODO: what if no part found?
-  sprintf(archive_url, "%s%s.mp3", DOWNLOAD_URL, parts[len - 1]);
-  free(path);
+  char *s = strdup(archive_url);
+  int len = path_split(s, "/", parts);
+  sprintf(download_url, "%s%s.mp3", DOWNLOAD_URL, parts[len - 1]);
 }
 
 static int
-search_for_links(GumboNode* node, char* links[], const int current) {
-  int i = current;
+search_for_links(GumboNode* node, char* links[], int current) {
+  int n = current;
+
   if (node->type != GUMBO_NODE_ELEMENT) {
-    return i;
+    return n;
   }
+
   GumboAttribute* href;
   if (node->v.element.tag == GUMBO_TAG_A &&
       node->parent->v.element.tag == GUMBO_TAG_TD &&
       (href = gumbo_get_attribute(&node->v.element.attributes, "href"))) {
-    to_archive_url(href->value, links[i++]);
+    // somehow this string needs to be stored in links[n++] got but that's not working
+    // due to recursion somehow?
+    char *s = strdup(href->value);
+    printf("%s\n", s);
   }
 
   GumboVector* children = &node->v.element.children;
   for (int i = 0; i < children->length; ++i) {
-    search_for_links((GumboNode*)(children->data[i]), links, i);
+    n = search_for_links((GumboNode*)(children->data[i]), links, n);
+  }
+  return n;
+}
+
+static int
+search_for_links_test(char* links[]) {
+  int i;
+  for (i = 0; i < 10; i++) {
+    links[i] = malloc(MAXURL);
+    sprintf(links[i], "%s/cre_00%d", ARCHIVE_URL, i);
   }
   return i;
 }
 
 int
 get_links(char* links[]) {
+  char* arch_links[MAX_LINKS];
+
   // TODO: this whole creating buffer over there and having to clean over here
   // doesn't seem very clean
   DownloadResult res = download_url_buffer(ARCHIVE_URL);
 
   GumboOutput* output = gumbo_parse(res.html);
 
-  int len = search_for_links(output->root, links, 0);
+  int llen = search_for_links(output->root, arch_links, 0);
   gumbo_destroy_output(&kGumboDefaultOptions, output);
+
+  int len = search_for_links_test(arch_links);
+
+  for (int i = 0; i < len; i++) {
+    links[i] = malloc(MAXURL);
+    to_download_url(arch_links[i], links[i]);
+  }
   return len;
 }
