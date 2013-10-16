@@ -61,5 +61,6 @@ int main(int argc, const char *argv[])
   for (int i = 0; i < len; i++) {
     printf("link: %s\n\n", links[i]);
   }
+
   return 0;
 }

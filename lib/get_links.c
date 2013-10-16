@@ -27,10 +27,9 @@ search_for_links(GumboNode* node, char* links[], int current) {
   if (node->v.element.tag == GUMBO_TAG_A &&
       node->parent->v.element.tag == GUMBO_TAG_TD &&
       (href = gumbo_get_attribute(&node->v.element.attributes, "href"))) {
-    // somehow this string needs to be stored in links[n++] got but that's not working
-    // due to recursion somehow?
-    char *s = strdup(href->value);
-    printf("%s\n", s);
+    links[n] = malloc(sizeof(char) * MAXURL);
+    strcpy(links[n], href->value);
+    n++;
   }
 
   GumboVector* children = &node->v.element.children;
@@ -43,7 +42,7 @@ search_for_links(GumboNode* node, char* links[], int current) {
 static int
 search_for_links_test(char* links[]) {
   int i;
-  for (i = 0; i < 10; i++) {
+  for (int i = 0; i < 10; i++) {
     links[i] = malloc(MAXURL);
     sprintf(links[i], "%s/cre_00%d", ARCHIVE_URL, i);
   }
@@ -60,10 +59,8 @@ get_links(char* links[]) {
 
   GumboOutput* output = gumbo_parse(res.html);
 
-  int llen = search_for_links(output->root, arch_links, 0);
+  int len = search_for_links(output->root, arch_links, 0);
   gumbo_destroy_output(&kGumboDefaultOptions, output);
-
-  int len = search_for_links_test(arch_links);
 
   for (int i = 0; i < len; i++) {
     links[i] = malloc(MAXURL);

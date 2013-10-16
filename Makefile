@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -std=c99
 LDFLAGS=-lcurl
 SOURCES=main.c $(wildcard lib/*.c) $(wildcard deps/**/*.c)
 OBJECTS=$(SOURCES:.c=.o)
