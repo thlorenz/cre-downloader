@@ -26,7 +26,9 @@ get_relative_writestream(char* subdir, char* name) {
 
   getcwd(cwd, sizeof(cwd));
   strcpy(full_path, cwd);
+  strcat(full_path, "/");
   strcat(full_path, subdir);
+  strcat(full_path, "/");
   strcat(full_path, name);
   return fopen(full_path, "wb");
 }
