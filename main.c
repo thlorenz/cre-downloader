@@ -3,12 +3,20 @@
 #include <string.h>
 #include "lib/download_url_file.h"
 #include "lib/get_links.h"
+#include "lib/path_split.h"
 
 void
 get_url(int n, char* name, char* url) {
-
   strcpy(url, ROOT_URL);
   strcat(url, name);
+}
+
+char*
+name_from_url(char* url) {
+  const char* parts[MAXPARTS];
+  char *s = strdup(url);
+  int len = path_split(s, "/", parts);
+  return (char*)parts[len -1];
 }
 
 FILE*
@@ -34,13 +42,12 @@ get_name(int n, char* name) {
 }
 
 void
-download_episode(int n) {
-  char name [MAXNAME];
-  char url [MAXURL];
+download_episode(char* url) {
   FILE *fp;
+  char *name;
 
-  get_name(n, name);
-  get_url(n, name, url);
+  name = name_from_url(url);
+  printf("downloading: %s to %s\n", url, name);
   fp = get_relative_writestream("casts", name);
 
   printf("Downloading: %s\n", url);
@@ -51,15 +58,14 @@ download_episode(int n) {
   fclose(fp);
 }
 
-
 int main(int argc, const char *argv[])
 {
   char* links[MAX_LINKS];
   int len = get_links(links);
 
   printf("Got %d links", len);
-  for (int i = 0; i < len; i++) {
-    printf("link: %s\n\n", links[i]);
+  for (int i = len - 11; i >= 33; i--) {
+    download_episode(links[i]);
   }
 
   return 0;
