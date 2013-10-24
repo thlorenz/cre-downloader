@@ -1,16 +1,16 @@
 CC=gcc
 CFLAGS=-c -Wall -std=c99
 LDFLAGS=-lcurl
-SOURCES=main.c $(wildcard lib/*.c) $(wildcard deps/**/*.c)
+SOURCES=test_download_url_file.c $(wildcard ../../lib/*.c) $(wildcard ../../deps/**/*.c)
 OBJECTS=$(SOURCES:.c=.o)
-EXECUTABLE=main
+EXECUTABLE=test_download_url_file
 
 .phony: all clean
 
 all: clean $(SOURCES) $(EXECUTABLE)
 
 start: all
-	./main
+	./test_download_url_file
 
 clean: 
 	rm -rf $(EXECUTABLE)
