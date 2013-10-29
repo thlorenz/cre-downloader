@@ -13,6 +13,7 @@ AC_CONFIG_FILES([
   Makefile
   deps/tap/Makefile
   src/Makefile
+  test/Makefile
 ])
 
 LT_INIT([shared])

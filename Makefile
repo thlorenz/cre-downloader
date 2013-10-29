@@ -338,7 +338,7 @@ target_alias =
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .
-SUBDIRS = deps/tap src
+SUBDIRS = deps/tap src test
 dist_doc_DATA = README.md
 ACLOCAL_AMFLAGS = -I m4 --install
 all: config.h
