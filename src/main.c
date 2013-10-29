@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include "download_url_file.h"
 
 int main(void) {
   const char *url = "https://github.com/thlorenz/cre-downloader/raw/master/lib/download_url_file.c";

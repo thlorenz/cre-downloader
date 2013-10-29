@@ -82,7 +82,7 @@ subdir = .
 DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.am \
 	$(top_srcdir)/configure $(am__configure_deps) \
 	$(srcdir)/config.h.in $(dist_doc_DATA) ar-lib compile \
-	config.guess config.sub install-sh missing ltmain.sh
+	config.guess config.sub depcomp install-sh missing ltmain.sh
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/m4/libtool.m4 \
 	$(top_srcdir)/m4/ltoptions.m4 $(top_srcdir)/m4/ltsugar.m4 \
@@ -338,7 +338,7 @@ target_alias =
 top_build_prefix = 
 top_builddir = .
 top_srcdir = .
-SUBDIRS = deps/tap
+SUBDIRS = deps/tap src
 dist_doc_DATA = README.md
 ACLOCAL_AMFLAGS = -I m4 --install
 all: config.h

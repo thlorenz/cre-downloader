@@ -12,6 +12,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_FILES([
   Makefile
   deps/tap/Makefile
+  src/Makefile
 ])
 
 LT_INIT([shared])
