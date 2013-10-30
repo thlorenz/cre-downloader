@@ -8,7 +8,6 @@ typedef struct DownloadResult {
   long status;
 } DownloadResult;
 
-DownloadResult
-download_url_buffer(char* url);
+DownloadResult download_url_buffer(const char* url);
 
 #endif
