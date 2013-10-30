@@ -4,7 +4,7 @@
 long download_url (
     const char* url
   , const void* ptr
-  , const size_t(*write_data)(void *ptr, size_t size, size_t nmemb, void *stream)
+  , const download_url_wd write_data
   ) {
 
   CURL *curl_handle;
