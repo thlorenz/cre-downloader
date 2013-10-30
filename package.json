@@ -4,7 +4,7 @@
   "description": "Downloads podcasts from cre-archive.",
   "main": "main.c",
   "scripts": {
-    "postinstall": "clib install thlorenz/gumbo-parser.c -o deps/gumbo-parser && clib install thlorenz/tap.c -o deps/tap"
+    "postinstall": "clib install thlorenz/gumbo-parser.c -o deps/gumbo-parser && clib install thlorenz/tap.c -o deps/tap && clib install jwerle/strsplit.h"
   },
   "repository": {
     "type": "git",
