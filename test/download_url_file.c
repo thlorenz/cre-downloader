@@ -12,7 +12,7 @@ int file_len(FILE *fp) {
 }
 
 int main(void) {
-  plan(1);
+  plan(2);
 
   const char *downloaded = "__remote_readme__.md";
   unlink(downloaded);
@@ -21,12 +21,14 @@ int main(void) {
   FILE *fp;
 
   char *remote = 0;
-  int remote_len;
+  int remote_len, status;
 
   // Download
   fp = fopen(downloaded, "wb");
-  download_url_file(url, fp);
+  status = download_url_file(url, fp);
   fclose(fp);
+
+  cmp_ok(status, "==", 200, "returns status 200");
 
   // Read downloaded README
   fp = fopen(downloaded, "r");

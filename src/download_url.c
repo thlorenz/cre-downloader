@@ -22,9 +22,8 @@ long download_url (
     curl_easy_cleanup(curl_handle);
 
     return curl_code != CURLE_ABORTED_BY_CALLBACK
-        && http_code == 200
-        ? 0
-        : http_code;
+        ? http_code
+        : -1;
   } else {
     return -1;
   }
