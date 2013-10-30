@@ -1,9 +1,7 @@
-AUTOMAKE_OPTIONS = subdir-objects
+UNIT_TESTS = \
+	download_url_file
 
-MANUAL_TESTS = \
-	manual/download_url_file
-
-ALL_TESTCASES = ${MANUAL_TESTS}
+ALL_TESTCASES = ${UNIT_TESTS}
 
 TESTCASES = ${ALL_TESTCASES}
 
