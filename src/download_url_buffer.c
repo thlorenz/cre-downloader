@@ -16,7 +16,6 @@ static size_t write_chunk_to_memory(void *contents, size_t size, size_t nmemb, v
 
   mem->memory = realloc(mem->memory, mem->size + realsize + 1);
   if(mem->memory == NULL) {
-    /* out of memory! */
     printf("not enough memory (realloc returned NULL)\n");
     return 0;
   }
