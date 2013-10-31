@@ -1,6 +1,7 @@
 UNIT_TESTS = \
 	download_url_file \
-	download_url_buffer
+	download_url_buffer \
+	get_links
 
 ALL_TESTCASES = ${UNIT_TESTS}
 
