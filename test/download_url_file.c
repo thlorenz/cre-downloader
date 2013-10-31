@@ -1,15 +1,7 @@
 #include <stdio.h>
 #include "../src/download_url_file.h"
 #include "../deps/tap/tap.h"
-
-int file_len(FILE *fp) {
-  int len;
-  fseek(fp, 0, SEEK_END);
-  len = ftell(fp);
-  fseek(fp, 0, SEEK_SET);
-
-  return len;
-}
+#include "../deps/fs.h"
 
 int main(void) {
   plan(2);
@@ -32,7 +24,8 @@ int main(void) {
 
   // Read downloaded README
   fp = fopen(downloaded, "r");
-  remote_len = file_len(fp);
+
+  remote_len = fs_fsize(fp);
   remote = malloc(remote_len);
   fread(remote, 1, remote_len, fp);
   fclose(fp);
