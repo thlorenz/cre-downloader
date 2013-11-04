@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../src/download_url_file.h"
+#include "../lib/download_url_file.h"
 #include "../deps/tap/tap.h"
 #include "../deps/fs.h"
 

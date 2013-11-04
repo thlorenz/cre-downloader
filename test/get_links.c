@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#include "../src/cre_limits.h"
-#include "../src/cre_consts.h"
-#include "../src/download_url_buffer.h"
-#include "../src/get_links.h"
+#include "../lib/cre_limits.h"
+#include "../lib/cre_consts.h"
+#include "../lib/download_url_buffer.h"
+#include "../lib/get_links.h"
 #include "../deps/tap/tap.h"
 #include "../deps/fs.h"
 #include "../deps/strsplit.h"
@@ -24,7 +24,7 @@ int main(void) {
   char *html = fs_fread(fp);
   fclose(fp);
 
-  printf("content:\n%s\n", html);
+//  printf("content:\n%s\n", html);
   ok(1, "downloaded");
   return 0;
 }

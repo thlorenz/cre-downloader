@@ -5,6 +5,8 @@ LDFLAGS=-lcurl
 TAP=$(wildcard deps/tap/*.c)
 TAP_OBJECTS=$(TAP:.c=.o)
 
+FS_OBJECTS=deps/fs.o
+
 LIB=$(wildcard lib/*.c)
 LIB_OBJECTS=$(LIB:.c=.o)
 
@@ -17,10 +19,10 @@ MAIN_OBJECTS=$(MAIN:.c=.o)
 EXECUTABLE=main
 
 $(EXECUTABLE): $(LIB_OBJECTS) $(MAIN_OBJECTS) 
-	$(CC) $(LDFLAGS) $(LIB_OBJECTS) $(MAIN_OBJECTS) -o $@
+	$(CC) $(LDFLAGS) $^ -o $@
 
-build-test-%: $(LIB_OBJECTS) $(TAP_OBJECTS)
-	$(CC) $(LDFLAGS) test/$(subst build-test-,,$@).c $(LIB_OBJECTS) $(TAP_OBJECTS) -o test/$(subst build-test-,,$@)
+build-test-%: $(LIB_OBJECTS) $(FS_OBJECTS) $(TAP_OBJECTS)
+	$(CC) $(LDFLAGS) test/$(subst build-test-,,$@).c $^ -o test/$(subst build-test-,,$@)
 
 test-%: build-test-%
 	test/$(subst test-,,$@)
