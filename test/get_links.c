@@ -7,24 +7,31 @@
 #include "../lib/get_links.h"
 #include "../deps/tap/tap.h"
 #include "../deps/fs.h"
-#include "../deps/strsplit.h"
 
 int main(void) {
   plan(1);
 
   // execution may happen from inside ./test or from parent dir, therefore we need to adapt relative path to fixtures
-  char cwd[MAX_PATH];
+  char cwd[MAXPATH];
   getcwd(cwd, sizeof(cwd));
   char **parts = calloc(MAXPARTS, sizeof(char));
-  size_t len = strsplit(cwd, parts, "/");
-  char *base = parts[len - 1];
+  size_t nparts = strsplit(cwd, parts, "/");
+  char *base = parts[nparts - 1];
   char *path = strcmp(base, "test") ? "test/fixtures/urls.html" : "fixtures/urls.html";
 
   FILE *fp = fopen(path, "rb");
   char *html = fs_fread(fp);
   fclose(fp);
 
-//  printf("content:\n%s\n", html);
-  ok(1, "downloaded");
+  char* links[MAXLINKS];
+  int len = get_links(html, links);
+  ok(len > 200, "gets more than 200 links");
+
+
+  for (int i = 0; i < len; i++) {
+    printf("%s\n", links[i]);
+  }
+
+  printf("len: %d", len);
   return 0;
 }
