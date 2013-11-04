@@ -5,6 +5,7 @@
 #include "../lib/cre_consts.h"
 #include "../lib/download_url_buffer.h"
 #include "../lib/get_links.h"
+#include "../lib/strsplit.h"
 #include "../deps/tap/tap.h"
 #include "../deps/fs.h"
 

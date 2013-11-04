@@ -7,6 +7,7 @@
 #include "cre_limits.h"
 #include "get_links.h"
 #include "download_url_buffer.h"
+#include "strsplit.h"
 
 static char* download_url_for(const char* url) {
   char* parts[MAXPARTS];

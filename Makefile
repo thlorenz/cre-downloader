@@ -21,6 +21,8 @@ MAIN=main.c
 MAIN_OBJECTS=$(MAIN:.c=.o)
 EXECUTABLE=main
 
+all: clean $(EXECUTABLE)
+
 $(EXECUTABLE): $(GUMBO_OBJECTS) $(LIB_OBJECTS) $(MAIN_OBJECTS) 
 	$(CC) $(LDFLAGS) $^ -o $@
 
@@ -44,4 +46,4 @@ clean:
 	rm -rf $(LIB_OBJECTS) $(MAIN_OBJECTS) $(EXECUTABLE) $(TEST_OBJECTS) $(TEST_EXECUTABLES) 
 	rm -rf $(GUMBO_OBJECTS) $(FS_OBJECTS) $(TAP_OBJECTS)
 
-.PHONY: clean test testv keep build-test-% test-%
+.PHONY: all clean test testv keep build-test-% test-%
