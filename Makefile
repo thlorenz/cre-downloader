@@ -36,7 +36,8 @@ testv: $(subst test/,,$(addprefix test-,$(TEST_EXECUTABLES)))
 	$(CC) $(CFLAGS) $< -o $@
 
 keep: $(FS_OBJECTS) $(TAP_OBJECTS)
+
 clean: 
-	rm -rf $(LIB_OBJECTS) $(MAIN_OBJECTS) $(EXECUTABLE) $(TEST_OBJECTS) $(TEST_EXECUTABLES) $(TAP_OBJECTS)
+	rm -rf $(LIB_OBJECTS) $(MAIN_OBJECTS) $(EXECUTABLE) $(TEST_OBJECTS) $(TEST_EXECUTABLES) $(FS_OBJECTS) $(TAP_OBJECTS)
 
 .PHONY: clean test testv keep build-test-% test-%
