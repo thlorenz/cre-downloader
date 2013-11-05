@@ -9,10 +9,11 @@
 #include "download_url_buffer.h"
 #include "strsplit.h"
 
-static char* download_url_for(const char* url) {
+static void to_download_url(char* url) {
   char* parts[MAXPARTS];
-  int n = strsplit((char*)url, parts, "/");
-  return parts[n - 1];
+  int n = strsplit(url, parts, "/");
+  strcpy(url, DOWNLOAD_URL);
+  strcat(url, parts[n - 1]);
 }
 
 static int search_for_links(const GumboNode* node, char* links[], int current) {
@@ -40,11 +41,9 @@ static int search_for_links(const GumboNode* node, char* links[], int current) {
 
 int get_links(const char* html, char* links[]) {
   GumboOutput* gum = gumbo_parse(html);
+  char down_url[MAXURL];
   int len = search_for_links(gum->root, links, 0);
-  for (int i = 0; i < len; i++) {
-    char *s = links[i];
-    links[i] = download_url_for(s);
-    free(s);
-  }
+  for (int i = 0; i < len; i++) to_download_url(links[i]);
+
   return len;
 }
