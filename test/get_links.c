@@ -11,7 +11,7 @@
 #include "../deps/fs.h"
 
 int main(void) {
-  plan(1);
+  plan(3);
 
   // execution may happen from inside ./test or from parent dir, therefore we need to adapt relative path to fixtures
   char cwd[MAXPATH];
@@ -29,11 +29,8 @@ int main(void) {
   int len = get_links(html, links);
   ok(len > 200, "gets more than 200 links");
 
+  is(links[0], "http://meta.metaebene.me/media/cre/cre001", "first link is cre001");
+  is(links[9], "http://meta.metaebene.me/media/cre/cre010-regine-debatty", "10th link is cre010-regine-debatty");
 
-  for (int i = 0; i < len; i++) {
-    printf("%s\n", links[i]);
-  }
-
-  printf("len: %d", len);
   return 0;
 }

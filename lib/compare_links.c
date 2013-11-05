@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include <math.h>
 
-static int get_episode(char* s) {
+static int get_episode(const char* s) {
   char c;
   int count = 0;
   int episode = 0;
@@ -22,7 +22,10 @@ static int get_episode(char* s) {
 }
 
 int compare_links(const void* a, const void* b) {
-  int ep1 = get_episode((char*)a);
-  int ep2 = get_episode((char*)b);
+  const char **ia = (const char **)a;
+  const char **ib = (const char **)b;
+
+  int ep1 = get_episode(*ia);
+  int ep2 = get_episode(*ib);
   return ep1 - ep2;
 }

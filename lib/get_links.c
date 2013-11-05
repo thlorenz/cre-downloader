@@ -7,7 +7,12 @@
 #include "cre_limits.h"
 #include "get_links.h"
 #include "download_url_buffer.h"
+#include "compare_links.h"
 #include "strsplit.h"
+
+static void qsort_links(char** links, int len) {
+  qsort(links, len, sizeof(char *), compare_links);
+}
 
 static void to_download_url(char* url) {
   char* parts[MAXPARTS];
@@ -41,9 +46,10 @@ static int search_for_links(const GumboNode* node, char* links[], int current) {
 
 int get_links(const char* html, char* links[]) {
   GumboOutput* gum = gumbo_parse(html);
-  char down_url[MAXURL];
   int len = search_for_links(gum->root, links, 0);
   for (int i = 0; i < len; i++) to_download_url(links[i]);
+
+  qsort_links(links, len);
 
   return len;
 }
