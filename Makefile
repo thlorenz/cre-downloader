@@ -1,5 +1,5 @@
 CC=cc
-CFLAGS=-c -Wall
+CFLAGS=-c -Wall -std=c99
 LDFLAGS=-lcurl
 
 TAP=$(wildcard deps/tap/*.c)
