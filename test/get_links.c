@@ -29,8 +29,8 @@ int main(void) {
   int len = get_links(html, links);
   ok(len > 200, "gets more than 200 links");
 
-  is(links[0], "http://meta.metaebene.me/media/cre/cre001", "first link is cre001");
-  is(links[9], "http://meta.metaebene.me/media/cre/cre010-regine-debatty", "10th link is cre010-regine-debatty");
+  is(links[0], "http://meta.metaebene.me/media/cre/cre001.mp3", "first link is cre001.mp3");
+  is(links[9], "http://meta.metaebene.me/media/cre/cre010-regine-debatty.mp3", "10th link is cre010-regine-debatty.mp3");
 
   return 0;
 }

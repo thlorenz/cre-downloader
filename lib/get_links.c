@@ -19,6 +19,7 @@ static void to_download_url(char* url) {
   int n = strsplit(url, parts, "/");
   strcpy(url, DOWNLOAD_URL);
   strcat(url, parts[n - 1]);
+  strcat(url, ".mp3");
 }
 
 static int search_for_links(const GumboNode* node, char* links[], int current) {

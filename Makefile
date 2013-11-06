@@ -26,6 +26,9 @@ all: clean $(EXECUTABLE)
 $(EXECUTABLE): $(GUMBO_OBJECTS) $(LIB_OBJECTS) $(MAIN_OBJECTS) 
 	$(CC) $(LDFLAGS) $^ -o $@
 
+start: $(EXECUTABLE)
+	$<
+
 build-test-%: $(GUMBO_OBJECTS) $(LIB_OBJECTS) $(FS_OBJECTS) $(TAP_OBJECTS)
 	$(CC) $(LDFLAGS) test/$(subst build-test-,,$@).c $^ -o test/$(subst build-test-,,$@)
 
