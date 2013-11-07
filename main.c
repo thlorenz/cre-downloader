@@ -33,7 +33,7 @@ void download_episode(char* url) {
 
   fp = fopen(full_path, "w");
   long status = download_url_file(url, fp);
-  if (status) printf("Download failed with status: %ld\n", status);
+  if (status != 200) printf("Download failed with status: %ld\n", status);
   fclose(fp);
 }
 
