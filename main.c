@@ -20,7 +20,6 @@ char* name_from_url(char* url) {
   return parts[len -1];
 }
 
-
 void download_episode(char* url) {
   FILE *fp;
   char cwd[MAXPATH];
@@ -28,7 +27,7 @@ void download_episode(char* url) {
   char *name = name_from_url(url);
 
   getcwd(cwd, sizeof(cwd));
-  sprintf(full_path, "%s/casts/%s.mp3", cwd, name);
+  sprintf(full_path, "%s/casts/%s", cwd, name);
 
   printf("downloading: %s to %s\n", url, full_path);
 
