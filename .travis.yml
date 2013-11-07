@@ -1,7 +1,7 @@
 language: c
 compiler:
   - gcc
-  - clang
+  - cc
 
 before_install: sudo apt-get install -y libtest-differences-perl
 install: npm install
